@@ -1,4 +1,10 @@
-#===========================
+'''
+Filename        : colours.py
+Author          : Aditya Murray 
+Date            : July 6, 2016
+Description     : This is a utility class to provide a neat way to write
+                  coloured texts
+'''
 
 #======== TEXT FORMATTING ==========================
 

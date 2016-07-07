@@ -1,3 +1,10 @@
+'''
+Filename        : stocks.py
+Author          : Aditya Murray
+Date            : 5th July 2016
+Description     : Valid recognized urls
+'''
+
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin

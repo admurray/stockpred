@@ -1,5 +1,8 @@
 '''
-Get a list of all the stock symbols.
+Filename        : stocks.py
+Author          : Aditya Murray
+Date            : 5th July 2016
+Description     : Get a list of all the stock symbols.
 '''
 
 import os

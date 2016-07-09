@@ -17,7 +17,7 @@ from db_stocks import DBStocks
 from stock_utils import *
 
 
-class Stocks:
+class Symbols:
     '''
     Get and classify the entire list
     '''
@@ -41,7 +41,6 @@ class Stocks:
             out = json.dumps([ row for row in reader ], indent=4, sort_keys=True)
             with open('%s_%s.json' %(TODAY, index), 'wb') as json_file:
                 json_file.write(out)
-        print '\nFILENAME : %s \n '%filename
         os.system('rm %s' %filename)
         return out
 
@@ -56,17 +55,8 @@ class Stocks:
             out = json.dumps([row for row in reader], indent=4, sort_keys=True)
             with open('%s_TSX.json'%TODAY, 'wb') as tsx_json:
                 tsx_json.write(out)
-        print 'FILENAME : %s \n' %filename
         os.system('rm %s' %filename)
         return out
 
-
-
-class Stock:
-    def __init__(self, name, symbol):
-        self.name = name
-        self.symbol = symbol
-
-
 if __name__ == '__main__':
-    stocks = Stocks()
+    Symbols()

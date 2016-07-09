@@ -10,7 +10,9 @@ from pymongo import MongoClient
 from stock_utils import *
 from colours import *
 
-class DBStocks:
+db = client['Symbols']
+
+class DBSymbols:
     def update_stock_symbols(self):
         for each in US_STYLE_INDICES:
             print '%s %s' %('Updating symbol list for : ', bright_colour(each))

@@ -13,7 +13,6 @@ from pymongo import MongoClient
 
 #Database Information
 client = MongoClient('mongodb://localhost:27017')
-db = client['Stocks']
 
 #Symbol ticker list csvs
 CSV_URL_LIST={

@@ -1,5 +1,5 @@
 '''
-Filename        : stocks.py
+Filename        : symbols.py
 Author          : Aditya Murray
 Date            : 5th July 2016
 Description     : Get a list of all the stock symbols.
@@ -13,9 +13,10 @@ import datetime
 import os.path
 import json
 from pprint import pprint
-from db_stocks import DBStocks
+from db_symbols import DBSymbols
 from stock_utils import *
 
+db = client['Symbols']
 
 class Symbols:
     '''
@@ -29,7 +30,7 @@ class Symbols:
         if not os.path.isfile('%s_TSX.json'%TODAY):
             self.tsx_list = self.get_tsx_list()
 
-        DBStocks().update_stock_symbols()
+        DBSymbols().update_stock_symbols()
 
     def get_us_symbol_list(self, index):
         filename = wget.download(CSV_URL_LIST[index])

@@ -11,70 +11,55 @@ import csv
 import json
 import datetime
 import os.path
+import json
+from pprint import pprint
+from db_stocks import DBStocks
+from stock_utils import *
 
-AMEX = 'http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=AMEX&render=download'
-NYSE = 'http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NYSE&render=download'
-NASDAQ = 'http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download'
-
-CSV_FIELDNAMES = ("Symbol", "Name", "LastSale", "MarketCap", "ADR TSO",
-                    "IPOyear", "Sector", "Industry", "Summary Quote")
 
 class Stocks:
     '''
     Get and classify the entire list
     '''
     def __init__(self):
-        daily_timestamp = datetime.date.today()
-        if not os.path.isfile('%s_amex.json'%daily_timestamp):
-            self.amex_list = self.get_amex_list()
-        if not os.path.isfile('%s_nyse.json'%daily_timestamp):
-            self.nyse_list = self.get_nyse_list()
-        if not os.path.isfile('%s_nasdaq.json'%daily_timestamp):
-            self.nasdaq_list = self.get_nasdaq_list()
+        for each in US_STYLE_INDICES:
+            if not os.path.isfile('%s_%s.json'%(TODAY, each)):
+                self.get_us_symbol_list(each)
 
-    def get_amex_list(self):
-        wget.download(AMEX)
-        amex_csv = open('companylist.csv', 'rb')
-        amex_csv_list = amex_csv.readlines()[1:]
-        open('companylist.csv', 'wb').writelines(amex_csv_list)
-        with open('companylist.csv', 'rb') as amex_csv:
-            reader = csv.DictReader(amex_csv, CSV_FIELDNAMES)
-            timestamp = datetime.date.today()
+        if not os.path.isfile('%s_TSX.json'%TODAY):
+            self.tsx_list = self.get_tsx_list()
+
+        DBStocks().update_stock_symbols()
+
+    def get_us_symbol_list(self, index):
+        filename = wget.download(CSV_URL_LIST[index])
+        csv_file = open(filename, 'rb')
+        csv_list = csv_file.readlines()[1:]
+        open(filename, 'wb').writelines(csv_list)
+        with open(filename, 'rb') as csv_file:
+            reader= csv.DictReader(csv_file, US_CSV_FIELDNAMES)
             out = json.dumps([ row for row in reader ], indent=4, sort_keys=True)
-            with open('%s_amex.json' %timestamp, 'wb') as amex_json:
-                amex_json.write(out)
-        os.system('rm companylist.csv')
-        return out
-
-    def get_nyse_list(self):
-        wget.download(NYSE)
-        nyse_csv = open('companylist.csv', 'rb')
-        nyse_csv_list = nyse_csv.readlines()[1:]
-        timestamp = datetime.date.today()
-        open('companylist.csv', 'wb').writelines(nyse_csv_list)
-        with open('companylist.csv', 'rb') as nyse_csv:
-            reader = csv.DictReader(nyse_csv, CSV_FIELDNAMES)
-            timestamp = datetime.date.today()
-            out = json.dumps([ row for row in reader], indent=4, sort_keys=True)
-            with open('%s_nyse.json'%timestamp, 'wb') as nyse_json:
-                nyse_json.write(out)
-        os.system('rm companylist.csv')
+            with open('%s_%s.json' %(TODAY, index), 'wb') as json_file:
+                json_file.write(out)
+        print '\nFILENAME : %s \n '%filename
+        os.system('rm %s' %filename)
         return out
 
 
-    def get_nasdaq_list(self):
-        wget.download(NASDAQ)
-        nasdaq_csv = open('companylist.csv', 'rb')
-        nasdaq_csv_list = nasdaq_csv.readlines()[1:]
-        open('companylist.csv', 'wb').writelines(nasdaq_csv_list)
-        with open('companylist.csv', 'rb') as nasdaq_csv:
-            reader = csv.DictReader(nasdaq_csv, CSV_FIELDNAMES)
-            timestamp = datetime.date.today()
+    def get_tsx_list(self):
+        filename = wget.download(CSV_URL_LIST['TSX'])
+        tsx_csv = open(filename, 'rb')
+        tsx_csv_list = tsx_csv.readlines()[5:]
+        open(filename, 'wb').writelines(tsx_csv_list)
+        with open(filename, 'rb') as tsx_csv:
+            reader = csv.DictReader(tsx_csv, TORONTO_CSV_FIELDNAMES)
             out = json.dumps([row for row in reader], indent=4, sort_keys=True)
-            with open('%s_nasdaq.json'%timestamp, 'wb') as nasdaq_json:
-                nasdaq_json.write(out)
-        os.system('rm companylist.csv')
+            with open('%s_TSX.json'%TODAY, 'wb') as tsx_json:
+                tsx_json.write(out)
+        print 'FILENAME : %s \n' %filename
+        os.system('rm %s' %filename)
         return out
+
 
 
 class Stock:

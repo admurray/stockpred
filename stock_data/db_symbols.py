@@ -29,7 +29,7 @@ class DBSymbols:
     def add_symbols(self, collection, index):
         with open('%s_%s.json' %(TODAY, index)) as sym_file:
             data = json.load(sym_file)
-            collection.insert([{'x': i} for i in data])
+            collection.insert([{'symbol_info': i} for i in data])
             print '%s %s' %('Total documents inserted : ' , bright_colour(len(data)))
             print '%s\n%s' %('Inserted collection id : ', bright_colour(collection.inserted_ids))
             #pprint(data)
@@ -38,7 +38,7 @@ class DBSymbols:
     def add_tsx_symbols(self, collection):
         with open('%s_TSX.json'%TODAY) as sym_file:
             data = json.load(sym_file)
-            collection.insert([{'x': i} for i in data])
+            collection.insert([{'symbol_info': i} for i in data])
             print '%s %s' %('Total documents inserted : ' , bright_colour(len(data)))
             print '%s %s' %('Inserted collection id : ', bright_colour(collection.inserted_ids))
             #pprint(data)

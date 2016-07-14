@@ -6,6 +6,8 @@ Description     : This is a utility class to provide a neat way to write
                   coloured texts
 '''
 
+import random
+
 #======== TEXT FORMATTING ==========================
 
 def normal_text(text):
@@ -48,7 +50,15 @@ def white(text):
 
 def holi_hai(text):
     wl = list(text)
-    return text
+    temp_start = '\033[1;'
+    temp_end = '\033[0m'
+    text2 = ''
+    print wl
+    for each in wl:
+        ran1 = random.randint(30, 55)
+        ran2 = random.randint(40, 59)
+        text2 += '%s%s;%sm%s%s'%(temp_start, ran1, ran2, each, temp_end)
+    return text2
 #================ COLOUR ON GREY =================
 def black_on_grey(text):
     return ("\033[0;30;47m%s\033[0m" %text)
@@ -98,4 +108,8 @@ def white_on_grey(text):
 
 def white_on_black(text):
     return ("\033[0;37;48m%s\033[0m" %text)
-#======================
+#=====================
+
+
+s = "All the worlds a stage and we are all idiots who think we are awesome"
+print holi_hai(s)

@@ -46,6 +46,9 @@ def bright_cyan(text):
 def white(text):
     return ("\033[1;37;40m%s\033[0m" %text)
 
+def holi_hai(text):
+    wl = list(text)
+    return text
 #================ COLOUR ON GREY =================
 def black_on_grey(text):
     return ("\033[0;30;47m%s\033[0m" %text)

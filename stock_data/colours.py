@@ -53,7 +53,6 @@ def holi_hai(text):
     temp_start = '\033[1;'
     temp_end = '\033[0m'
     text2 = ''
-    print wl
     for each in wl:
         ran1 = random.randint(30, 55)
         ran2 = random.randint(40, 59)

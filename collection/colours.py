@@ -110,5 +110,5 @@ def white_on_black(text):
 #=====================
 
 
-s = "All the worlds a stage and we are all idiots who think we are awesome"
+s = "All the worlds a stage!!!"
 print holi_hai(s)

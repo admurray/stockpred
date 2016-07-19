@@ -21,8 +21,8 @@ class DBSymbols:
             self.add_symbols(collection, each)
 
         print '%s %s' %('Updating symbol list for : ', bright_colour('TSX'))
-        db['TsxSymbols'].remove({})
-        collection = db['TsxSymbols']
+        db['TSXSymbols'].remove({})
+        collection = db['TSXSymbols']
         self.add_tsx_symbols(collection)
 
 

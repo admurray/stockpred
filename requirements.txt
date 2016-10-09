@@ -1,0 +1,6 @@
+ystockquote
+yahoo_finance
+googlefinance
+pymongo
+futures
+wget

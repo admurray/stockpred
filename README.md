@@ -22,4 +22,8 @@ chmod u+x main.py
 ./main.py
 ```
 
+# Design
 
+### Architecture
+
+![Alt text](/readme_files/Diagram.jpeg?raw=true "Basic Architecture")

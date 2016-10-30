@@ -26,4 +26,4 @@ chmod u+x main.py
 
 ### Architecture
 
-![Alt text](/readme_files/Diagram.jpeg?raw=true "Basic Architecture")
+![Alt text](/readme_files/Diagram1.jpeg?raw=true "Basic Architecture")

@@ -3,5 +3,5 @@ SQL_DATABASE = {
     'port': 3306,
     'user': 'root',
     'database': 'websteel',
-    'password': 'notpassword'
+    'password': ''
 }
